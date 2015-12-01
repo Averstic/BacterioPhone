@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bacterio-phone</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- slider dependencies> -->
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <link href="css/bootstrap-slider.css" rel="stylesheet" />
+
+        <script src="js/bootstrap-slider.js"></script>
+    <!-- toggle dependencies> -->
+   
+   
+    <link href="css/bootstrap-toggle.min.css" rel="stylesheet" />
+    
+    <script src="js/bootstrap-toggle.min.js"></script>
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    
+        
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+                <script>
+                   function startOD() {
+                     
+                     if (window.ON) {
+                        document.getElementById('OD').innerHTML = "OD"
+                        console.log("retrieving OD")
+                    }else{
+                        document.getElementById('OD').innerHTML = 0
+                    }
+                   }
+                </script>
+                <script>
+                   function startTemp() {
+                     
+                     if (window.ON) {
+                        document.getElementById('temp').innerHTML = "Temp"
+                        console.log("retrieving Temp")
+                    }else{
+                        document.getElementById('temp').innerHTML = 0
+                    }
+                   }
+                </script>
+                <script>
+                
+                function startTime() {             
+                    
+                    var today = new Date();
+                    var diff= today - window.date
+                    startTemp()
+                    startOD()
+                    if (window.ON) {
+                        document.getElementById('txt').innerHTML = dhm(diff)
+                         var t = setTimeout(startTime, 500);
+                    }else{
+                        
+                         document.getElementById('txt').innerHTML = dhm(0)
+                            var t = setTimeout(startTime, 500);}
+                    }
+                   
+               
+               function dhm(ms){
+                days = Math.floor(ms / (24*60*60*1000));
+                daysms=ms % (24*60*60*1000);
+                hours = Math.floor((daysms)/(60*60*1000));
+                hoursms=ms % (60*60*1000);
+                minutes = Math.floor((hoursms)/(60*1000));
+                minutesms=ms % (60*1000);
+                sec = Math.floor((minutesms)/(1000));
+                return days+":"+hours+":"+minutes+":"+sec;
+}
+                
+                </script>
+</head>
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">HOME</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="active">
+                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Home <small>Parameter Overview</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Dashboard
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-flask fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        
+                                        <div class="huge"></div>
+                                         <div class="huge" id="OD"></div>
+                                        <div>OD!</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-fire fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                       
+                                        <div class="huge" id="temp"></div>
+                                        <div>Current Temperature!</div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-clock-o fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <body onload=startTime()></body>
+                                            
+                                        <div class="huge" id="txt"></div>
+                                        <div>Running Time!</div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-check-square fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                       
+                                        <input id="toggle-event" data-toggle="toggle" type="checkbox" data-style="android" data-width="140" data-onstyle="danger" data-offstyle="default"/>
+                                         <style>
+                                        .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+                                        .toggle.ios .toggle-handle { border-radius: 20px; }
+                                      </style>
+                                        <script type="text/javascript">                                       
+                                          
+                                            $("#toggle-event").change(function() {
+                                            ON =$(this).prop('checked')                                            
+                                            if (ON) {
+                                             
+                                             date= new Date();
+                                             window.MySlider.slider('setValue', 255);
+                                             console.log("button is ON: " + ON)
+                                            } else {
+                                            
+                                             window.MySlider.slider('setValue', 0)
+                                             console.log("button is ON: " + ON)
+                                             
+                                            }                                            
+                                              
+                                            })
+                                            
+                                        </script>
+                                        
+                                            <div>
+                                        <input id="ex1" data-slider-id='ex1Slider' data-slider-min="0" data-slider-max="255" data-slider-step="5" data-slider-value="0" />
+                                                        <script type="text/javascript">
+                                                            // With JQuery
+                                                            
+                                                           var MySlider= $('#ex1').slider({
+                                                                formatter: function(value) {
+                                                                        console.log(value)
+                                                                        return value
+                                                                }
+                                                        });
+                                                                                                        
+                                                        </script>
+                                                        <style type="text/css">
+                                                            #ex1Slider .slider-selection {                                                                    
+                                                                background: #F08080;
+                                                            }
+                                                            #ex1Slider .slider-handle{                                                                    
+                                                                background: #FFFFFF;
+                                                            }
+                                                        </style>
+                                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Area Chart</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-area-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+
+</body>
+
+</html>
